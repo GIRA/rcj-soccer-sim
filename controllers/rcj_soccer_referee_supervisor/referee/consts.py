@@ -1,7 +1,7 @@
 from referee.enums import Team
 
-# NOTE(Richo): Changed from 10 minutes to 5 minutes
-DEFAULT_MATCH_TIME = 5 * 60
+# NOTE(Richo): Changed from 10 minutes to 5 minutes and then to 3:30
+DEFAULT_MATCH_TIME = 3.5 * 60
 
 GOAL_YELLOW_Y_LIMIT = -0.745
 GOAL_BLUE_Y_LIMIT = 0.745
