@@ -1,4 +1,5 @@
 from referee.supervisor import RCJSoccerSupervisor
+from wb import wb
 
 
 # HACK(Richo): For some unknown reason, some of the supervisor labels mess
@@ -18,3 +19,9 @@ class GIRASoccerSupervisor(RCJSoccerSupervisor):
 
     def hide_goal_sign(self):
         pass
+
+    # HACK(Richo): Workaround for the following bug: https://github.com/cyberbotics/webots/issues/5920
+    # Even though it's already fixed in the nightly build we can't wait until the next webots version 
+    # so I'm adding this here to be able to use webots R2023a
+    def simulationSetMode(self, mode: int):
+        wb.wb_supervisor_simulation_set_mode(mode)
