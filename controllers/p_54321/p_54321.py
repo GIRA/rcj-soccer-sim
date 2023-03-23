@@ -62,6 +62,7 @@ def pointer_to_list(pointer, length):
     result = []
     for i in range(0, length):
         result.append(pointer[i])
+    return result
 
 def receive_latest_data(receiver):
     packet = None
