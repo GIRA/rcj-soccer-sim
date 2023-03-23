@@ -199,7 +199,7 @@ class GIRASoccerReferee(RCJSoccerReferee):
 
     def checkIncomingMessages(self):  # noqa: C901
         # Get the message in from the robot window(if there is one)
-        message_text = self.sv.wwiReceiveText()
+        message_text = self.sv.wwiReceiveText() or ""
 
         # If there is a message
         if message_text != "":
