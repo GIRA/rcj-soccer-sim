@@ -53,6 +53,15 @@ right_motor.setPosition(float("+inf"))
 left_motor.setVelocity(0.0)
 right_motor.setVelocity(0.0)
 
+# HACK(Richo): For some reason, the Receiver.getEmitterDirection() no longer returns a
+# list of numbers, instead it returns an object of type LP_c_double. IIUC this object
+# represents a pointer to double. I guess they changed the FFI code and forgot to fix
+# this. There is probably a better way of transforming it to a list but this seems to
+# work fine (and also it should keep working even if they fix the bug eventually)
+def pointer_to_list(pointer, length):
+    result = []
+    for i in range(0, length):
+        result.append(pointer[i])
 
 def receive_latest_data(receiver):
     packet = None
@@ -61,8 +70,9 @@ def receive_latest_data(receiver):
     counter = 0
     while receiver.getQueueLength() > 0:
         counter = counter + 1
-        packet = receiver.getData()
-        direction = receiver.getEmitterDirection()
+        packet = receiver.getBytes()
+        # HACK(Richo): The emitter direction should be a list of 3 numbers, not a LP_c_double
+        direction = pointer_to_list(receiver.getEmitterDirection(), 3)
         strength = receiver.getSignalStrength()
         receiver.nextPacket()
     if counter > 1:
@@ -79,7 +89,7 @@ def receive_latest_data(receiver):
 def receive_all_data(receiver):
     data = []
     while receiver.getQueueLength() > 0:
-        packet = receiver.getData()
+        packet = receiver.getBytes()
         direction = receiver.getEmitterDirection()
         strength = receiver.getSignalStrength()
         data.append((packet, direction, strength))
@@ -171,12 +181,12 @@ while robot.step(TIME_STEP) != -1:
         client_sock.sendto(data, (UDP_IP, UDP_PORT))
 
         data, addr = client_sock.recvfrom(1024)
-        # print(f"received message: {data} from {addr}")
+        # print(robot_name, f"- received message: {data} from {addr}")
         data = json.loads(data)
-
+        
         for msg in data.get("team") or []:
             send_team_data(msg)
-
+        
         left_motor.setVelocity(data["L"])
         right_motor.setVelocity(data["R"])
 
