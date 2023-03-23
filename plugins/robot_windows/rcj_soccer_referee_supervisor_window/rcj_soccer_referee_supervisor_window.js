@@ -1,3 +1,5 @@
+import RobotWindow from 'https://cyberbotics.com/wwi/R2023a/RobotWindow.js';
+
 $("#start-button").on("click", function () {
 	send("reset");
 });
@@ -85,24 +87,15 @@ let UPDATE_INTERVAL = 128;
 });
 
 window.onload = function() {
-	if (window.webots) {
-		window.robotWindow = webots.window();
-		window.robotWindow.setTitle('Fútbol de Robots!');
-		window.robotWindow.receive = function (str) {
-			let json = JSON.parse(str);
-			let msg = json["msg"];
-			let args = json["args"];
-			if (msg == undefined) return;
-			receive(msg, args);
-		};
-	} else {
-		// HACK(Richo): Mock to test without webots
-		window.robotWindow = {
-			send: function (data) {
-				console.log("SEND: " + data);
-			}
-		};
-	}
+	window.robotWindow = new RobotWindow();	
+	window.robotWindow.setTitle('Fútbol de Robots!');
+	window.robotWindow.receive = function (str) {
+		let json = JSON.parse(str);
+		let msg = json["msg"];
+		let args = json["args"];
+		if (msg == undefined) return;
+		receive(msg, args);
+	};
 
 	window.addEventListener("resize", resizeMessages);
 	resizeMessages();
