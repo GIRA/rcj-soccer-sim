@@ -1,4 +1,4 @@
-#VRML_SIM R2023b utf8
+#VRML_SIM R2025a utf8
 
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2022b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
@@ -1240,7 +1240,7 @@ DEF Y1 Robot {
       ]
       endPoint Solid {
         translation 0 -0.045 -0.0176
-        rotation -4.84338434959195e-11 4.843366558880515e-11 -1 1.5708
+        rotation -5.723999685881397e-11 5.723978660495155e-11 -1 1.5708
         children [
           Pose {
             rotation -0.5771969549958951 0.5776567755050862 -0.5771969549958951 2.0939354039397986
@@ -1287,7 +1287,7 @@ DEF Y1 Robot {
       ]
       endPoint Solid {
         translation 0 0.045 -0.0176
-        rotation -4.7379215983996383e-11 4.737904195073807e-11 -1 1.5708
+        rotation -5.5993618890177544e-11 5.5993413214508636e-11 -1 1.5708
         children [
           Pose {
             rotation -0.5771969549958951 0.5776567755050862 -0.5771969549958951 2.0939354039397986
@@ -1499,7 +1499,7 @@ DEF Y2 Robot {
       ]
       endPoint Solid {
         translation 0 -0.045 -0.0176
-        rotation -3.8834926253180834e-11 3.883478360479352e-11 -1 1.5708
+        rotation -4.7464909864998793e-11 4.7464735516969856e-11 -1 1.5708
         children [
           Pose {
             rotation -0.5771969549958951 0.5776567755050862 -0.5771969549958951 2.0939354039397986
@@ -1546,7 +1546,7 @@ DEF Y2 Robot {
       ]
       endPoint Solid {
         translation 0 0.045 -0.0176
-        rotation -3.928559242945016e-11 3.92854481256766e-11 -1 1.5708
+        rotation -4.801572408043908e-11 4.801554770916028e-11 -1 1.5708
         children [
           Pose {
             rotation -0.5771969549958951 0.5776567755050862 -0.5771969549958951 2.0939354039397986
@@ -1758,7 +1758,7 @@ DEF Y3 Robot {
       ]
       endPoint Solid {
         translation 0 -0.045 -0.0176
-        rotation 2.9348523611361095e-11 -2.934841580841238e-11 -1 1.5708
+        rotation 3.5870417747219114e-11 -3.587028598805958e-11 -1 1.5708
         children [
           Pose {
             rotation -0.5771969549958951 0.5776567755050862 -0.5771969549958951 2.0939354039397986
@@ -1805,7 +1805,7 @@ DEF Y3 Robot {
       ]
       endPoint Solid {
         translation 0 0.045 -0.0176
-        rotation 2.931255238536323e-11 -2.9312444714543974e-11 -1 1.5708
+        rotation 3.582645291544395e-11 -3.582632131777597e-11 -1 1.5708
         children [
           Pose {
             rotation -0.5771969549958951 0.5776567755050862 -0.5771969549958951 2.0939354039397986
