@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+* Features
+  * [#143](https://github.com/robocup-junior/rcj-soccersim/pull/143) Update Webots from R2023b to R2025a
+
 ## v2.2
 
 * Features
