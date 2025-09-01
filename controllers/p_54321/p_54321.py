@@ -65,13 +65,13 @@ def pointer_to_list(pointer, length):
     return result
 
 def receive_latest_data(receiver):
-    packet = None
+    payload = None
     direction = None
     strength = None
     counter = 0
     while receiver.getQueueLength() > 0:
         counter = counter + 1
-        packet = receiver.getBytes()
+        payload = receiver.getString()
         # HACK(Richo): The emitter direction should be a list of 3 numbers, not a LP_c_double
         direction = pointer_to_list(receiver.getEmitterDirection(), 3)
         strength = receiver.getSignalStrength()
@@ -84,39 +84,35 @@ def receive_latest_data(receiver):
             "- Packets lost:",
             counter - 1,
         )
-    return (packet, direction, strength)
-
+    return (payload, direction, strength)
 
 def receive_all_data(receiver):
     data = []
     while receiver.getQueueLength() > 0:
-        packet = receiver.getBytes()
+        payload = receiver.getString()
         direction = receiver.getEmitterDirection()
         strength = receiver.getSignalStrength()
-        data.append((packet, direction, strength))
+        data.append((payload, direction, strength))
         receiver.nextPacket()
     if len(data) == 0:
         return None
     return data
 
-
 def add_supervisor_data(data):
-    packet, _, _ = receive_latest_data(receiver)
-    if packet is None:
+    payload, _, _ = receive_latest_data(receiver)
+    if payload is None:
         return
-    struct_fmt = "?"
-    unpacked = struct.unpack(struct_fmt, packet)
-    data["waiting_for_kickoff"] = unpacked[0]
 
+    for k, v in json.loads(payload).items():
+        data[k] = v
 
 def add_team_data(data):
     in_data = receive_all_data(team_receiver)
     if in_data is None:
         return
     data["team"] = [
-        json.loads(packet.decode("utf8")) for packet, _, _ in in_data
+        json.loads(payload) for payload, _, _ in in_data
     ]
-
 
 def send_team_data(data):
     if data is None:
