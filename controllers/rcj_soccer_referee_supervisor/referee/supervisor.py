@@ -47,7 +47,7 @@ class RCJSoccerSupervisor(Supervisor):
 
     def check_reset_physics_counters(self):
         # HACK(Richo): Workaround for the following issue
-        # https://github.com/RoboCupJuniorTC/rcj-soccer-sim/issues/130
+        # https://github.com/RoboCupJuniorTC/rcj-soccersim/issues/130
         for robot in ROBOT_NAMES:
             reset_physics_counter = self.robot_reset_physics[robot]
             if reset_physics_counter > 0:
@@ -217,13 +217,13 @@ class RCJSoccerSupervisor(Supervisor):
                 object_name, ROBOT_INITIAL_ROTATION[object_name]
             )
 
-    def emit_data(self, packet: bytes):
+    def emit_data(self, data: str):
         """Send packet via emitter
 
         Args:
-            packet (bytes): the packet to be sent
+            data (str): the data to be sent
         """
-        self.emitter.send(packet)
+        self.emitter.send(data)
 
     def draw_team_names(self, team_name_blue: str, team_name_yellow: str):
         """Visualize (draw) the names of the teams.
