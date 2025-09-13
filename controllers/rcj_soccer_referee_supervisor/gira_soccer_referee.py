@@ -30,7 +30,7 @@ from referee.utils import time_to_string
 STATE_FILE = "state.json"
 CONTROLLERS_DIR = ".."
 SUPERVISOR_NAME = os.path.split(os.getcwd())[1]
-
+BALL_CONTROLLER_NAME = "rcj_soccer_ball"
 
 def print_msg(key, args, response_id):
     kargs = ", ".join([f"{k}: {args[k]}" for k in args])
@@ -348,6 +348,7 @@ class GIRASoccerReferee(RCJSoccerReferee):
     def update_controllers_list(self):
         controllers = os.listdir(CONTROLLERS_DIR)
         controllers.remove(SUPERVISOR_NAME)
+        controllers.remove(BALL_CONTROLLER_NAME)
         self.send(
             "update_controllers_list",
             controllers=controllers,
